@@ -1,10 +1,11 @@
 {% extends 'layout.html' %}
 {% block content %}
-  <h2>Post details</h2>
   <div class="user-post">
-    <p>{{ post.author }}</p>
-    <p>{{ post.date_added }}</p>
-    <p>{{ post.text }}</p>
+    <h3>{{ post.text }}</h3>
+    by <b><small>{{ post.author }}</small></b>
+    on <b><small>{{ post.date_added }}</small></b>
+    <hr>
+    <br>
   </div>
   {% for comment in post.comments.all %}
     <b>{{ comment.author }}</b>: {{ comment.text }}

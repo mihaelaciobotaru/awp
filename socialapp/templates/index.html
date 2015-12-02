@@ -9,12 +9,17 @@
   {% for post in posts %}
     <div class="user-post">
       <hr>
-      <p>{{ post.author }}</p>
-      <p>{{ post.date_added }}</p>
+      <h3>
+        {{ post.text | slice:":15" }}
+        {% if post.text|length > 15 %}
+        ...
+        {% endif %}
+      </h3>
       <p>
-        {{ post.text | slice:":15" }} ...
-        <a href="{% url 'post_details' post.pk %}">See more</a>
+        by <b><small>{{ post.author }}</small></b>
+        on <b><small>{{ post.date_added }}</small></b>
       </p>
+      <a href="{% url 'post_details' post.pk %}"><small>See more</small></a>
     </div>
   {% endfor %}
 {% endblock %}
