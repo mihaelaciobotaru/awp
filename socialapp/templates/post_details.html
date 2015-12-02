@@ -6,4 +6,8 @@
     <p>{{ post.date_added }}</p>
     <p>{{ post.text }}</p>
   </div>
+  {% for comment in post.comments.all %}
+    <b>{{ comment.author }}</b>: {{ comment.text }}
+    <br>
+  {% endfor %}
 {% endblock %}
