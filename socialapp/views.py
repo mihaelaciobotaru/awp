@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
-from socialapp.models import UserPost
-from socialapp.forms import UserPostForm
+from socialapp.models import UserPost, UserPostComment
+from socialapp.forms import UserPostForm, UserPostCommentForm
 
 
 def index(request):
@@ -24,5 +24,17 @@ def index(request):
 
 def post_details(request, pk):
     post = UserPost.objects.get(pk=pk)
-    context = {'post': post}
-    return render(request, 'post_details.html', context)
+    if request.method == 'GET':
+        form = UserPostCommentForm()
+        context = {
+            'post': post,
+            'form': form,
+        }
+        return render(request, 'post_details.html', context)
+    elif request.method == 'POST':
+        form = UserPostCommentForm(request.POST)
+        if form.is_valid():
+            text = form.cleaned_data['text']
+            comment = UserPostComment(text=text, post=post)
+            comment.save()
+        return redirect('post_details', pk=pk)
