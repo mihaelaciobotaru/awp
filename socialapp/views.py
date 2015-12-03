@@ -20,7 +20,7 @@ def index(request):
         form = UserPostForm(request.POST)
         if form.is_valid():
             text = form.cleaned_data['text']
-            user_post = UserPost(text=text)
+            user_post = UserPost(text=text, author=request.user)
             user_post.save()
         return redirect('index')
 
@@ -39,7 +39,7 @@ def post_details(request, pk):
         form = UserPostCommentForm(request.POST)
         if form.is_valid():
             text = form.cleaned_data['text']
-            comment = UserPostComment(text=text, post=post)
+            comment = UserPostComment(text=text, post=post, author=request.user)
             comment.save()
         return redirect('post_details', pk=pk)
 
