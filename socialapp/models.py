@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -5,7 +6,7 @@ class UserPost(models.Model):
     text = models.TextField(max_length=500)
     date_added = models.DateTimeField(
         auto_now_add=True)
-    author = models.CharField(default='Eau de Web', max_length=20)
+    author = models.ForeignKey(User)
 
     class Meta:
         ordering = ['-date_added']
@@ -17,7 +18,7 @@ class UserPost(models.Model):
 class UserPostComment(models.Model):
     text = models.TextField(max_length=100)
     date_added = models.DateTimeField(auto_now_add=True)
-    author = models.CharField(default='Eau De Web', max_length=20)
+    author = models.ForeignKey(User)
     post = models.ForeignKey(UserPost, related_name='comments')
 
     class Meta:

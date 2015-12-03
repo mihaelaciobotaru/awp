@@ -3,6 +3,9 @@
     <title>My social network</title>
   </head>
   <body>
+    {% if user.is_authenticated %}
+      <a href="{% url 'logout' %}">Log out</a>
+    {% endif %}
     <h1>Welcome to my social network!</h1>
     {% block content %}
     {% endblock %}
