@@ -6,7 +6,7 @@
     {{ form.as_p }}
     <input type="submit" value="Post">
   </form>
-  {% for post in posts %}
+  {% for post in object_list %}
     <div class="user-post">
       <hr>
       <h3>
@@ -19,6 +19,8 @@
         by <b><small>{{ post.author }}</small></b>
         on <b><small>{{ post.date_added }}</small></b>
       </p>
+      <a href="{% url 'edit_post' post.pk %}"><small>Edit</small></a>
+      <a href="{% url 'delete_post' post.pk %}"><small>Delete</small></a>
       <a href="{% url 'post_details' post.pk %}"><small>See more</small></a>
     </div>
   {% endfor %}

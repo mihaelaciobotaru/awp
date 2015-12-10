@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.core.urlresolvers import reverse
 
 
 class UserPost(models.Model):
@@ -10,6 +11,9 @@ class UserPost(models.Model):
 
     class Meta:
         ordering = ['-date_added']
+
+    def get_absolute_url(self):
+        return reverse('index')
 
     def __unicode__(self):
         return u'{} @ {}'.format(self.author, self.date_added)

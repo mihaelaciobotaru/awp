@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+{% block content %}
+  <h2>Delete post</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p>Are you sure you want to delete this post?</p>
+    <input type="submit" value="Yes">
+    <a href="{% url 'index' %}">No</a>
+  </form>
+{% endblock %}
