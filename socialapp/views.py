@@ -5,8 +5,8 @@ from django.shortcuts import render, redirect
 from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView, DeleteView
 
-from socialapp.forms import UserPostForm, UserPostCommentForm, UserLoginForm
-from socialapp.models import UserPost, UserPostComment
+from socialapp.forms import UserPostForm, UserPostCommentForm, UserLoginForm#, UserProfileForm
+from socialapp.models import UserPost, UserPostComment, UserProfile
 
 
 class LoginRequiredMixin(object):
@@ -92,3 +92,23 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
+
+def profile_view(request, pk):
+    profile = UserProfile.objects.get(pk=pk)
+    if request.method == 'GET':
+        context = {'profile': profile}
+        return render(request, 'profile.html', context)
+
+# to be continued...
+# missing UserProfileForm and profile_edit.html
+"""def profile_edit(request, pk):
+    profile = UserProfile.object.get(pk=pk)
+    if request.method == 'GET':
+        form = UserProfileForm()
+        context = {'profile': profile, 'form': form }
+        return render(request, 'profile_edit.html', context)
+    elif request.method == 'POST':
+        form = UserProfileForm(request.POST)
+        if form.is_valid():"""
+

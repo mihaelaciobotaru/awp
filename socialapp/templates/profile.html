@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="user_profile">
+        <h4>First name: {{ profile.first_name }}</h4>
+        <h4>Last name: {{ profile.last_name }}</h4>
+        <img src="{{ profile.get_absolute_avatar_url }}">
+        <p>{{ profile.birthday }}</p>
+        <p>{{ profile.gender }}</p>
+    </div>
+{% endblock %}

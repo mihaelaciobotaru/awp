@@ -11,4 +11,6 @@ urlpatterns = [
     url(r'^post/(?P<pk>\d+)/$', views.post_details, name='post_details'),
     url(r'^login/$', views.login_view, name='login'),
     url(r'^logout/$', views.logout_view, name='logout'),
+    url(r'^profile/(?P<pk>\d+)', views.profile_view, name='profile_view'),
+    #url(r'profile-edit/(?P<pk>\d+)', views.profile_edit, name='profile_edit'),
 ]
