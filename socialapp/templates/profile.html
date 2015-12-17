@@ -4,7 +4,11 @@
         <h4>First name: {{ profile.first_name }}</h4>
         <h4>Last name: {{ profile.last_name }}</h4>
         <img src="{{ profile.get_absolute_avatar_url }}">
-        <p>{{ profile.birthday }}</p>
-        <p>{{ profile.gender }}</p>
+        <p>Birthday: {{ profile.birthday }}</p>
+        <p>Gender: {{ profile.gender }}</p>
     </div>
+    {% if profile.user == request.user %}
+        <a href="{% url 'profile_edit' user.pk %}">Edit profile</a>
+    {% endif %}
 {% endblock %}
+

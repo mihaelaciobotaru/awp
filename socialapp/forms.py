@@ -1,4 +1,4 @@
-from django.forms import Form, CharField, Textarea, PasswordInput
+from django.forms import Form, CharField, Textarea, PasswordInput, DateTimeInput, ImageField
 
 
 class UserPostForm(Form):
@@ -16,3 +16,12 @@ class UserPostCommentForm(Form):
 class UserLoginForm(Form):
     username = CharField(max_length=30)
     password = CharField(widget=PasswordInput)
+
+
+class UserProfileForm(Form):
+    first_name = CharField(max_length=21)
+    last_name = CharField(max_length=21)
+    birthday = DateTimeInput()
+    gender = CharField(max_length=1)
+    avatar = ImageField()
+

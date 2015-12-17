@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView, DeleteView
 
-from socialapp.forms import UserPostForm, UserPostCommentForm, UserLoginForm#, UserProfileForm
+from socialapp.forms import UserPostForm, UserPostCommentForm, UserLoginForm, UserProfileForm
 from socialapp.models import UserPost, UserPostComment, UserProfile
 
 
@@ -100,15 +100,27 @@ def profile_view(request, pk):
         context = {'profile': profile}
         return render(request, 'profile.html', context)
 
-# to be continued...
-# missing UserProfileForm and profile_edit.html
-"""def profile_edit(request, pk):
-    profile = UserProfile.object.get(pk=pk)
+
+def profile_edit(request, pk):
+    profile = UserProfile.objects.get(pk=pk)
     if request.method == 'GET':
         form = UserProfileForm()
-        context = {'profile': profile, 'form': form }
+        context = {'profile': profile, 'form': form}
         return render(request, 'profile_edit.html', context)
     elif request.method == 'POST':
         form = UserProfileForm(request.POST)
-        if form.is_valid():"""
+        if form.is_valid():
+            """first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            birthday = form.cleaned_data['birthday']
+            gender = form.cleaned_data['gender']
+            avatar = form.cleaned_data['avatar']
+            profile = UserProfile(first_name=first_name, last_name=last_name,
+                                  birthday=birthday, gender=gender, avatar=avatar, user=request.user)
+            profile.save()"""
+            profile_form = form.save()
+            profile = UserProfile(request.POST, instance=profile_form)
+            if profile.is_valid():
+                profile.save()
+        return redirect('profile_view', pk=pk)
 
